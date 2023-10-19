@@ -8,87 +8,101 @@ To write a program to predict the marks scored by a student using the simple lin
 2. Anaconda – Python 3.7 Installation / Jupyter notebook
 
 ## Algorithm
-1. Import the required libraries and read the dataframe.
-2. Assign hours to X and scores to Y.
-3. Implement training set and test set of the dataframe.
-4. Plot the required graph both for test data and training data.
-5. Find the values of MSE , MAE and RMSE.
+1. Use the standard libraries in python for Gradient Design. 
+
+2. Set variables for assigning dataset values. 
+
+3. Import linear regression from sklearn.
+
+4. Assign the points for representing the graph.
+
+5.Predict the regression for marks by using the representation of the graph.
+
+6.Compare the graphs and hence we obtained the linear regression for the given data.
 
 ## Program:
 ```
 /*
 Program to implement the simple linear regression model for predicting the marks scored.
-Developed by: Ganesh P
+Developed by: P Ganesh
 RegisterNumber: 212220040112
-/*
-```
-```
-/*
+*/
 import pandas as pd
 import numpy as np
-df=pd.read_csv('student_scores.csv')
-print(df)
+import matplotlib.pyplot as plt
+from sklearn.metrics import mean_absolute_error,mean_squared_error
+df=pd.read_csv('/content/student_scores.csv')
 df.head()
 df.tail()
 X=df.iloc[:,:-1].values
+X
 Y=df.iloc[:,1].values
-print(X,Y)
+Y
 from sklearn.model_selection import train_test_split
 X_train,X_test,Y_train,Y_test=train_test_split(X,Y,test_size=1/3,random_state=0)
 from sklearn.linear_model import LinearRegression
-reg=LinearRegression()
-reg.fit(X_train,Y_train)
-
-Y_pred=reg.predict(X_test)
-import matplotlib.pyplot as plt
-from sklearn.metrics import mean_absolute_error , mean_squared_error
-
-plt.scatter(X_train,Y_train,color='green')
-plt.plot(X_train,reg.predict(X_train),color='purple')
-plt.title(' Training set (Hours Vs Scores)')
-plt.xlabel('Hours')
-plt.ylabel('Scores')
-
-plt.scatter(X_test,Y_test,color='green')
-plt.plot(X_test,reg.predict(X_test),color='purple')
-plt.title(' Training set (Hours Vs Scores)')
-plt.xlabel('Hours')
-plt.ylabel('Scores')
-
+regressor=LinearRegression()
+regressor.fit(X_train,Y_train)
+Y_pred=regressor.predict(X_test)
+Y_pred
+Y_test
+plt.scatter(X_train,Y_train,color="orange")
+plt.plot(X_train,regressor.predict(X_train),color="red")
+plt.title("Hours vs Scores (Training Set)")
+plt.xlabel("Hours")
+plt.ylabel("Scores")
+plt.show()
+plt.scatter(X_test,Y_test,color="purple")
+plt.plot(X_test,regressor.predict(X_test),color="yellow")
+plt.title("Hours vs Scores (Test Set)")
+plt.xlabel("Hours")
+plt.ylabel("Scores")
+plt.show()
 mse=mean_squared_error(Y_test,Y_pred)
 print('MSE = ',mse)
 mae=mean_absolute_error(Y_test,Y_pred)
 print('MAE = ',mae)
 rmse=np.sqrt(mse)
 print('RMSE = ',rmse)
-*/
+print('Values of MSE')
 ```
 
 ## Output:
-initial dataframe :
+1.df.head()
 
-![m4](https://user-images.githubusercontent.com/94748389/192093643-be9a12e6-5867-477a-9662-6a41bbb248b3.png)
-![mld1](https://user-images.githubusercontent.com/94748389/199940097-68c8323e-b4a1-4cfb-8ff1-2ddf1975b96f.png)
-![mld2](https://user-images.githubusercontent.com/94748389/199940152-6291ee38-7512-485b-b161-55eca20b83ab.png)
+![df head()](https://user-images.githubusercontent.com/128135126/229293862-34870b9a-d46d-41cb-9ea0-13cea22f00ae.png)
 
-Assigning hours to X and scores to Y :
+2.df.tail()
 
-![m5](https://user-images.githubusercontent.com/94748389/192093653-f3b88dca-c965-4279-a758-98ab506c2ac2.png)
+![df tail()](https://user-images.githubusercontent.com/128135126/229293967-09c262a2-1793-4fa3-9ad4-5b969c669900.png)
 
-Training set (Hours Vs Scores) :
+3.Array value of X
 
-![m6](https://user-images.githubusercontent.com/94748389/192093668-6d4b3884-8865-4a70-9672-9b0e25c84292.png)
+![Array value of X](https://user-images.githubusercontent.com/128135126/229293469-8f08eb90-7774-46aa-b0db-0ac8df78dad3.png)
 
-Test set (Hours Vs Scores) :
+4.Array value of Y
 
-![m7](https://user-images.githubusercontent.com/94748389/192093680-33a2b35f-58bc-42e7-8a97-8d95f897d4f3.png)
+![Array value of Y](https://user-images.githubusercontent.com/128135126/229293494-aa427d62-0d42-4747-9b9d-474c5f58fb29.png)
 
-Finding the values of MSE , MAE and RMSE :
+5.Values of Y prediction
 
-![m8](https://user-images.githubusercontent.com/94748389/192093688-56e3f998-4339-4558-9579-0f21e908af62.png)
+![Values of Y prediction](https://user-images.githubusercontent.com/128135126/229293514-ef09d849-1b86-4783-b366-9552fbafecca.png)
 
+6.Array values of Y test
 
+![Array values of Y test](https://user-images.githubusercontent.com/128135126/229293545-32b41b3c-8494-4138-8f49-6161ed6af60b.png)
 
+7.Training set graph
+
+![Training set graph](https://user-images.githubusercontent.com/128135126/229293565-fbd372b3-aac6-4ed6-be0b-87905f046ebb.png)
+
+8.Test set graph
+
+![Test set graph](https://user-images.githubusercontent.com/128135126/229293588-9a4d9a34-3f38-4e5f-bd77-3e3f79bb2cf0.png)
+
+9.Values of MSE,MAE and RMSE
+
+![Values of MSE,MAE and RMSE](https://user-images.githubusercontent.com/128135126/229293605-f9e791d8-b7c0-45c1-ac1b-2901364e8b26.png)
 
 ## Result:
 Thus the program to implement the simple linear regression model for predicting the marks scored is written and verified using python programming.
